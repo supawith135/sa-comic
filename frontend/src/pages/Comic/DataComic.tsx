@@ -34,6 +34,7 @@ const DataComic: React.FC = () => {
       title: "Category",
       dataIndex: "Category",
       key: "category",
+      render: (item) => Object.values(item.Name),
     },
     {
       title: "Description",

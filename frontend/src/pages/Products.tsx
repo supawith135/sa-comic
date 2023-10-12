@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import { UserOutlined, AudioOutlined } from '@ant-design/icons';
-import { Layout, Space, Pagination, Input, Empty } from 'antd';
+import {EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
+import { Layout, Card, List ,Image, Typography, Rate, Button , Tag,Space} from 'antd';
+import { GetComic,GetCategory } from "../services/https";
+import { ComicsInterface } from "../interfaces/IComic";
+import { CategoryInterface } from "../interfaces/ICategory";
+const { Meta } = Card;
 const { Content } = Layout;
-const { Search } = Input;
-const onSearch = (value: string) => console.log(value);
-
 const contentStyle: React.CSSProperties = {
 
   minHeight: 720,
@@ -14,38 +15,78 @@ const contentStyle: React.CSSProperties = {
   backgroundColor: 'white',
 };
 
-const searchStyle: React.CSSProperties = {
-    paddingTop: '"80px"',
-    margin: '10px',
-    textAlign: 'center',
+const itemCardImage: React.CSSProperties = {
+    height: "150px",
+    objectFit: "scale-down"
+
   }
   
-  const dataStyle: React.CSSProperties = {
-    paddingTop: '"80px"',
-    margin: '80px',
-    textAlign: 'center',
-  }
 const Products: React.FC = () => {
+ 
+  const [comics ,setComics] = useState<ComicsInterface[]>([])
+  const [category, setCategory] = useState<CategoryInterface[]>([]);
+  const getComics = async () =>{
+    let res = await GetComic();
+    if(res){
+      setComics(res);
+    }
+  }
+  const getCategories = async () => {
+    let res = await GetCategory();
+    if (res) {
+      setCategory(res);
+    }
+  };
+  useEffect(() => {
+    getComics();
+    getCategories();
+  }, []);
+
   return (
     <>
       <Header />
       <Navbar />
       <Content style={contentStyle}>
-              <div style={{textAlign : 'center', color:'black', fontSize: '30px'}}>
-                <h1> Products</h1>
-              </div>
-              <div style={searchStyle}>
-                <Search placeholder="ค้าหาหนังสือการ์ตูน..." onSearch={onSearch} style={{ width: 800 }} />
-              </div>
-              <div style={dataStyle}>
-                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-              </div>
-              <div style={{margin: '120px', paddingTop: '20px', textAlign: 'center'}}>
-                <Pagination defaultCurrent={1} total={50} />
-              </div>
+        <div style={{ textAlign: "center", color: "black", fontSize: "30px" }}>
+          <h1> Products</h1>
+        </div>
+        <div>
+          <List
+            grid={{ gutter: 30,  column: 4}}
+            dataSource={comics}
+            renderItem={(Products) => (
+              <List.Item className="">
+                <Card
+                  hoverable
+                  className=""
+                  cover={<Image style={itemCardImage}  src={Products.Image}></Image>}
+                  actions={[
+                    <Rate value={3}/>,
+                    <button  key={Products.ID} className="btn btn-success">฿ {Products.Price}</button>
+                  ]}
+                  //ชื่อเรื่องComic title={Products.Title}
+                ><Meta title={Products.Title}></Meta> 
+                <Space>
+                {category.map((item) => (
+                    <Tag  key={item.Name}>
+                      {item.Name}
+                    </Tag>
+                  ))}
+                </Space >
+                  <Card.Meta
+                    // title={<Typography>Price : {Products.Price} .-</Typography>}
+                    description = {<Typography.Paragraph ellipsis={{rows :2, expandable:true , symbol:'more'}}>{Products.Description}</Typography.Paragraph>}
+                  ></Card.Meta>
+
+                  
+                </Card>
+              </List.Item>
+            )}
+          />
+        </div>
+
       </Content>
-      
     </>
-  )
+  );
 };
 export default Products;
