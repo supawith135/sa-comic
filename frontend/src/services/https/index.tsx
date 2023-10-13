@@ -43,6 +43,24 @@ async function GetCategory() {
   return res;
 }
 
+async function GetCategoryByID(id: Number | undefined) {
+  const requestOptions = {
+    method: "GET"
+  };
+
+  let res = await fetch(`${apiUrl}/category/${id}`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+
 async function DeleteComicByID(id: Number | undefined) {
   const requestOptions = {
     method: "DELETE"
@@ -124,5 +142,6 @@ export {
     GetComicById,
     CreateComic,
     UpdateComic,
+    GetCategoryByID,
 };
   

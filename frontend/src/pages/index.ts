@@ -15,4 +15,6 @@ export { default as DataComic } from "./Comic/DataComic";
 export { default as Approve } from "./Approve";
 export { default as Admin } from "./Admin";
 export { default as EditProduct} from "./Comic/EditProduct/EditProduct"
+export { default as ProfileComic } from "./ProfileComic/ProfileComic";
+
 

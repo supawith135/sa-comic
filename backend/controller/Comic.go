@@ -92,3 +92,15 @@ func UpdateComic(c *gin.Context){
 	}
 	c.JSON(http.StatusOK, gin.H{"data": &comic})
 }
+
+// GET /Category/:id
+	
+func GetCategory(c *gin.Context){
+	var category entity.Category
+	id := c.Param("id")
+	if err := entity.DB().Raw("SELECT * FROM categories WHERE id = ?", id).Find(&category).Error; err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": category})
+}

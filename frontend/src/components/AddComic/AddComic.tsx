@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, Form, Select, message, InputNumber, Upload } from "antd";
+import { Input, Form, Select, message, InputNumber, Upload ,Card} from "antd";
 import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
 import { ComicsInterface } from "../../interfaces/IComic";
@@ -7,6 +7,7 @@ import { CategoryInterface } from "../../interfaces/ICategory";
 import { ImageUpload } from "../../interfaces/IUpload";
 import { CreateComic, GetCategory } from "../../services/https";
 import { useNavigate } from "react-router-dom";
+import { Products } from "../../pages";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -27,7 +28,6 @@ function ComicCreate() {
     let res = await CreateComic(values);
     if (res.status) {
       swal("Thank you!", `คุณเพิ่มหนังสือการ์ตูนสำเร็จแล้ว.`, "success");
-
       setTimeout(function () {
         navigate("/DataComic");
       }, 2000);
@@ -53,6 +53,8 @@ function ComicCreate() {
     setImage(e?.fileList[0]);
     return e?.fileList;
   };
+
+  
 
   return (
     <>

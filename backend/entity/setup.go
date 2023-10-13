@@ -6,16 +6,17 @@ import (
 )
 
 var db *gorm.DB
-func DB() *gorm.DB  {
+
+func DB() *gorm.DB {
 	return db
 }
 
-func SetupDatabase(){
+func SetupDatabase() {
 	database, err := gorm.Open(sqlite.Open("sa-66-comic.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
-	
+
 	// Migrate the schema
 	database.AutoMigrate(
 		&Category{},

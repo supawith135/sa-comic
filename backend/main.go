@@ -18,6 +18,7 @@ func main() {
 	r.DELETE("/comics/:id", controller.DeleteComic)
 	// Category Routes
 	r.GET("/category", controller.ListCategory)
+	r.GET("/category/:id", controller.GetCategory)
 	// Run the server
 	r.Run()
 

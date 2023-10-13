@@ -17,7 +17,7 @@ import {
   Approve,
   Admin,
   EditProduct,
-  
+  ProfileComic,
 } from "./pages";
 // import {Admin,AddProduct,Approve,DataComic,Member} from "./pages/Admin";
 const App = () => {
@@ -39,6 +39,7 @@ const App = () => {
         <Route path="/Approve" element={<Approve />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/EditProduct/:id" element={<EditProduct />} />
+        <Route path="/ProfileComic/:id" element={<ProfileComic />} />
         
     
       </Routes>
