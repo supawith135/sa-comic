@@ -101,7 +101,7 @@ const Products: React.FC = () => {
                     <Space>
                       {/* Display categories as tags */}
                       {categories
-                        .filter((category) => category.ID === comic.CategoryID)
+                        .filter((category) => category.ID === comic.Category_id)
                         .map((selectedCategory) => (
                           <Tag className="my-4" key={selectedCategory.ID}>
                             {selectedCategory.Name}

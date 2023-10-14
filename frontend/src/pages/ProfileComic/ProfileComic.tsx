@@ -96,7 +96,7 @@ const ProfileComic: React.FC = () => {
                           </h4>
                           <p className="mt-3 text-3xl">฿ {comic.Price} </p>
                           {categories
-                        .filter((category) => category.ID === comic.CategoryID)
+                        .filter((category) => category.ID === comic.Category_id)
                         .map((selectedCategory) => (
                           <Tag className="text-2xl mt-4" key={selectedCategory.ID}>
                             {selectedCategory.Name}

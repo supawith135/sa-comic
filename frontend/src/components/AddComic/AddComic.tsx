@@ -54,8 +54,6 @@ function ComicCreate() {
     return e?.fileList;
   };
 
-  
-
   return (
     <>
       <Form onFinish={onFinnish}>
@@ -73,7 +71,7 @@ function ComicCreate() {
           <div className="contents">
             <div className="ml-4 w-80 ">
               <Form.Item
-                name="CategoryID"
+                name="Category_id"
                 label="Category"
                 rules={[{ required: true, message: "กรุณาเลือกประเภท !" }]}
               >
@@ -155,7 +153,6 @@ function ComicCreate() {
             </div>
           </div>
         </div>
-
         <div className="card-actions ml-12 mt-3">
           <Form.Item>
             <button className="btn  btn-outline btn-success  w-full max-w-xs">

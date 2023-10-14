@@ -18,10 +18,11 @@ func CreateComic(c *gin.Context) {
 		return
 	}
 	//ค้าหา category ด้วย id
-	if tx := entity.DB().Where("id = ?", comic.CategoryID).First(&category); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", comic.Category_id).First(&category); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "category not found"})
 		return
 	}
+	
 
 	//สร้าง comic
 	u := entity.Comic{

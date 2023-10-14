@@ -40,7 +40,6 @@ const App = () => {
         <Route path="/Admin" element={<Admin />} />
         <Route path="/EditProduct/:id" element={<EditProduct />} />
         <Route path="/ProfileComic/:id" element={<ProfileComic />} />
-        
     
       </Routes>
     </Router>

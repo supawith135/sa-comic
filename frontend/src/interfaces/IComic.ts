@@ -7,6 +7,6 @@ export interface ComicsInterface {
     Url?: string;
     Price?: number;
     Image?: string;
-    CategoryID?: number;
+    Category_id?: number;
     Category?: CategoryInterface;
 }
